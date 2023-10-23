@@ -41,6 +41,28 @@ public class Quicksort {
 		return high;
 	}
 	
+	public static int Partition2(int[] arr, int low, int high) {
+		int start = low;
+		int end = high;
+		int pivot = arr[(low + high) / 2];
+		int current = low;
+		//compare current with pivot
+		int currentValue = arr[current];
+		if (currentValue < pivot) {//case 1: current item is smaller than pivot
+			arr[current] = arr[start];
+			arr[start] = currentValue;
+			start++;
+			current++;
+		} else if (currentValue == pivot) {//case 2: current item is equal to pivot
+			current++;
+		} else {//case 3: current item is larger than pivot
+			arr[current] = arr[end];
+			arr[end] = currentValue;
+			end--;
+		}
+		return end;
+	}
+	
 	public static void QuickSort(int[] arr, int low, int high) {
 		//when quicksort stop?
 		//when there is only one item is past into the quicksort method

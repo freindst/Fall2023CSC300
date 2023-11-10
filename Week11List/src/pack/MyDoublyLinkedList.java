@@ -66,4 +66,17 @@ public class MyDoublyLinkedList<T> {
 		this.Tail = node;
 		this.Size++;
 	}
+	
+	public void Prepend(T tar) {
+		MyDoubleNode<T> node = new MyDoubleNode<T>(tar);
+		if (this.Head == null) {
+			this.Head = node;
+			this.Tail = node;
+		}
+		MyDoubleNode<T> headNode = this.Head;
+		this.Head = node;
+		node.NextNode = headNode;
+		headNode.PreviousNode = node;
+		this.Size++;
+	}
 }

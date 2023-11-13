@@ -108,11 +108,37 @@ public class HugeInteger extends MyDoublyLinkedList<Integer> {
 	}
 	
 	public HugeInteger multiply(HugeInteger hi) {
-		
+		HugeInteger result = new HugeInteger();
+		result.Append(0);
+		MyDoubleNode<Integer> thisNode = hi.Tail;
+		int zeros = 0;
+		while(thisNode != null) {
+			HugeInteger tmpResult = this.multiplySingleDigit(thisNode.Data, zeros);
+			result = result.plus(tmpResult);
+			zeros++;
+			thisNode = thisNode.PreviousNode;
+		}
+		return result;
 	}
 	
 	//every steps of multiply
-	public HugeInteger multiplySingleDigit(int i) {
-		
+	public HugeInteger multiplySingleDigit(int i, int zeros) {
+		int carrier = 0;
+		int tmpResult = 0;
+		HugeInteger result = new HugeInteger();
+		MyDoubleNode<Integer> thisNode = this.Tail;
+		while(thisNode != null) {
+			tmpResult = carrier + thisNode.Data * i;
+			result.Prepend(tmpResult % 10);
+			carrier = tmpResult / 10;
+			thisNode = thisNode.PreviousNode;
+		}
+		if (carrier > 0) {
+			result.Prepend(carrier);
+		}
+		for(int k = 0; k < zeros; k++) {
+			result.Append(0);
+		}
+		return result;
 	}
 }

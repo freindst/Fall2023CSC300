@@ -46,13 +46,20 @@ public class HashTable_Chaining extends HashTable {
 
 	@Override
 	public void HashDelete(int key) {
-		// TODO Auto-generated method stub
-
+		//1 using hashing function get the index of the key
+		int index = Hashing(key);
+		//2 perform linked list delete
+		Chain target = Table[index];
+		target.DeleteNodeByKey(key);
 	}
 	
 	@Override
 	public String toString() {
-		return "";
+		String output = "";
+		for(int i = 0; i < this.Size; i++) {
+			output += "[" + i + "]: " + this.Table[i].toString() + "\n";
+		}
+		return output;
 	}
 
 }
